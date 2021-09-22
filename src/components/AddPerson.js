@@ -40,11 +40,11 @@ const AddPerson = (props) => {
         age: entertedAge,
         email: entertedEmail
     };
+    console.log(personObject);
     props.onSavePersonData(personObject);
     setEnteredName('');
     setEnteredAge('');
     setEnteredEmail('');
-    // console.log(personObject);
   };
 
   return (

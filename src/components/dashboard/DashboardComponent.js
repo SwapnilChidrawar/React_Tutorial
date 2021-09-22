@@ -1,12 +1,23 @@
-import { useState } from "react";
-
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import Wrapper from "../Wrapper";
 import "./DashboardComponent.css";
+
+const ResuableComponent = (props) => {
+  return (
+    <div>
+      <p> Name: {props.name} </p>
+      <p> Age: {props.age} </p>
+      <p> Email: {props.email} </p>
+    </div>
+  );
+};
 
 const DashboardComponent = (props) => {
   let [name, setName] = useState(props.name);
-  console.log('Dashboard component called');
+  console.log("Dashboard component called");
   const title = "Hello my name is swapnil";
-//   let name = props.name;
+  //   let name = props.name;
   // function clickHandler() {
   //     console.log('click function called');
   // }
@@ -17,15 +28,61 @@ const DashboardComponent = (props) => {
   };
 
   return (
-    <div>
+    //   [
+    //     <p className="custom-class"> {title} </p>,
+    //     <p> Name: {props.name} </p>,
+    //     <p> Age: {props.age} </p>,
+    //     <p> Email: {props.email} </p>,
+    //     <button onClick={clickHandler}> Submit </button>,
+    //     <p>****************************</p>
+    // ]
+
+    // <Wrapper>
+    //     <p className="custom-class"> {title} </p>
+    //     <p> Name: {props.name} </p>
+    //     <p> Age: {props.age} </p>
+    //     <p> Email: {props.email} </p>
+    //     {/* <button onClick={() => { console.log('clicked') }}> Submit </button> */}
+    //     <button onClick={clickHandler}> Submit </button>
+    //     <p>****************************</p>
+    //   </Wrapper>
+
+    <React.Fragment>
       <p className="custom-class"> {title} </p>
-      <p> Name: {props.name} </p>
-      <p> Age: {props.age} </p>
-      <p> Email: {props.email} </p>
+
+      {ReactDOM.createPortal(
+        <ResuableComponent
+          name={props.name}
+          age={props.age}
+          email={props.email}
+        />,
+        document.getElementById("another_root")
+      )}
+
       {/* <button onClick={() => { console.log('clicked') }}> Submit </button> */}
       <button onClick={clickHandler}> Submit </button>
       <p>****************************</p>
-    </div>
+    </React.Fragment>
+
+    // <>
+    //   <p className="custom-class"> {title} </p>
+    //   <p> Name: {props.name} </p>
+    //   <p> Age: {props.age} </p>
+    //   <p> Email: {props.email} </p>
+    //   {/* <button onClick={() => { console.log('clicked') }}> Submit </button> */}
+    //   <button onClick={clickHandler}> Submit </button>
+    //   <p>****************************</p>
+    // </>
+
+    // <div>
+    //   <p className="custom-class"> {title} </p>
+    //   <p> Name: {props.name} </p>
+    //   <p> Age: {props.age} </p>
+    //   <p> Email: {props.email} </p>
+    //   {/* <button onClick={() => { console.log('clicked') }}> Submit </button> */}
+    //   <button onClick={clickHandler}> Submit </button>
+    //   <p>****************************</p>
+    // </div>
   );
 };
 

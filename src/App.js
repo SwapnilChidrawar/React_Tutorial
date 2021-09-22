@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 import "./App.css";
 import DashboardComponent from "./components/dashboard/DashboardComponent";
@@ -20,6 +20,7 @@ const Dummy_Data = [
 ];
 
 function App() {
+  let data = useRef();
   let flag = true;
   const [person, setPerson] = useState(Dummy_Data);
 
@@ -28,10 +29,19 @@ function App() {
       return [data, ...preState];
     });
 
-    console.log("Data in Parent", data);
+    // console.log("Data in Parent", data);
+    console.log(`Data in Parent, ${data}`);
   };
+
+  const getData = () => {
+    console.log(data.current.value);
+  }
+
   return (
     <div className="App">
+
+    <input type="text" ref={data}/>
+    <button type="button" onClick={getData}> Get Data </button>
       {/* {flag ? (
         <h3> Welcome to react Js !!! </h3>
       ) : (
@@ -40,6 +50,10 @@ function App() {
 
       {flag && <h3> Welcome to react Js !!! </h3>}
       {!flag && <h3> Welcome to Angular Js !!! </h3>}
+
+      <p style={{'background-color': flag ? 'blue' : 'transparent'}}> Hello My Name is swapnil </p>
+
+      <p className={`form-control ${flag ? 'valid' : 'invalid'}`}> Hi Please decorate me with dynamic classes </p>
 
       <AddPerson onSavePersonData={getPersonData}></AddPerson>
 
